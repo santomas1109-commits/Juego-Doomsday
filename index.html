@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crónicas del Multiverso · Infinito, Doomsday y Secret Wars</title>
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b101b'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23fb923c' stroke-width='4'/%3E%3Cpolygon points='32,14 37,27 51,27 40,35 44,49 32,41 20,49 24,35 13,27 27,27' fill='%2338bdf8'/%3E%3C/svg%3E"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header id="hud" class="hud hidden">
+      <div class="hud-top">
+        <span id="music-mood" class="music-tag">Tema: Inspirado en The Avengers</span>
+        <button id="btn-music" type="button" class="btn mini-btn">Música: ON</button>
+      </div>
+      <div class="hud-stats">
+        <div class="stat"><span>Forma</span><strong id="stat-forma">Estable</strong></div>
+        <div class="stat"><span>Fama</span><strong id="stat-fama">50</strong></div>
+        <div class="stat"><span>Energía</span><strong id="stat-energia">80</strong></div>
+        <div class="stat"><span>Equipo</span><strong id="stat-equipo">55</strong></div>
+      </div>
+    </header>
+
+    <section id="screen-start" class="card">
+      <div class="brand-row">
+        <svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#0c1322" />
+          <circle cx="32" cy="32" r="22" fill="none" stroke="#fb923c" stroke-width="4" />
+          <polygon points="32,14 37,27 51,27 40,35 44,49 32,41 20,49 24,35 13,27 27,27" fill="#38bdf8" />
+        </svg>
+        <div>
+          <div class="kicker">SIMULADOR DE CARRERA HEROICA</div>
+          <h1>Crónicas del Multiverso</h1>
+        </div>
+      </div>
+
+      <div class="intro-box">
+        <p><strong></strong> Recorré 6 fases desde la <em>Saga del Infinito</em> hasta <em>Doomsday</em> y <em>Secret Wars</em>.</p>
+        <p>Elegí tu origen y alcance, resolvé escenas rápidas y minijuegos, cuidá tu Energía y Equipo, y mirá tu OVR real al final.</p>
+      </div>
+
+      <label for="hero-name">Nombre o alias del héroe</label>
+      <input id="hero-name" type="text" placeholder="Ej: Centinela del Vacío" maxlength="28" />
+
+      <label for="hero-origin">Origen de tus poderes</label>
+      <select id="hero-origin">
+        <option value="elite_tec">Humanos de élite y tecnología</option>
+        <option value="mutante">Mutantes</option>
+        <option value="alterado">Alterados por ciencia o accidentes</option>
+        <option value="mistico">Místicos y sobrenaturales</option>
+        <option value="cosmico">Cósmicos, divinos y alienígenas</option>
+      </select>
+
+      <label for="hero-scale">Alcance de acción</label>
+      <select id="hero-scale">
+        <option value="callejero">Callejero</option>
+        <option value="global">Global o de equipo</option>
+        <option value="cosmico_multi">Cósmico y multiversal</option>
+        <option value="antiheroe">Antihéroe</option>
+      </select>
+
+      <button id="btn-start" type="button" class="btn primary">Iniciar carrera</button>
+
+      <div id="records-panel" class="records-box">
+        <div class="records-header">
+          <strong>Tu historial local</strong>
+          <span id="record-best">Mejor OVR: —</span>
+        </div>
+        <ul id="records-list" class="records-list"></ul>
+        <button id="btn-clear-records" type="button" class="btn mini-btn">Limpiar historial</button>
+      </div>
+    </section>
+
+    <section id="screen-event" class="card hidden">
+      <div class="meta">
+        <span id="event-stage" class="badge">Fase 1</span>
+        <span id="event-progress">Escena 1</span>
+      </div>
+      <h2 id="event-title">Título del evento</h2>
+
+      <div id="event-image-wrap" class="event-image-wrap">
+        <div class="event-image-frame">
+          <img id="event-image" src="" alt="Ilustración de la escena" loading="eager" decoding="async" />
+        </div>
+        <div id="event-image-caption" class="event-image-caption"></div>
+      </div>
+
+      <p id="event-alert" class="alert-bar hidden"></p>
+      <p id="event-text" class="story"></p>
+      <div id="options-list" class="options"></div>
+    </section>
+
+    <section id="screen-minigame" class="card hidden">
+      <div class="meta">
+        <span class="badge">MOMENTO CLAVE · SINCRONÍA</span>
+        <span id="minigame-choice-label">Jugada decisiva</span>
+      </div>
+      <h2>Frená el pulso en la zona dorada</h2>
+      <p class="story">Apretá <strong>Ejecutar</strong> o <strong>Espacio</strong> en el centro dorado.</p>
+
+      <div class="track-wrap">
+        <div class="track-bar">
+          <div class="sweet-zone"></div>
+          <div id="cursor-marker" class="cursor-marker"></div>
+        </div>
+      </div>
+
+      <button id="btn-stop-minigame" type="button" class="btn primary">Ejecutar jugada</button>
+    </section>
+
+    <section id="screen-result" class="card hidden">
+      <div class="meta">
+        <span id="result-tag" class="badge">RESOLUCIÓN</span>
+      </div>
+      <h2 id="result-title">Resultado</h2>
+      <p id="result-text" class="story"></p>
+      <ul id="result-changes" class="changes"></ul>
+      <button id="btn-next" type="button" class="btn primary">Continuar</button>
+    </section>
+
+    <section id="screen-end" class="card hidden">
+      <div class="meta">
+        <span class="badge">EXPEDIENTE MULTIVERSAL</span>
+      </div>
+      <h2>Balance de Carrera</h2>
+      <p id="end-summary" class="story"></p>
+      <div id="end-stats" class="end-grid"></div>
+      <div class="share-box">
+        <pre id="share-text" class="share-pre"></pre>
+        <button id="btn-copy" type="button" class="btn secondary">Copiar resumen de carrera</button>
+        <span id="copy-feedback" class="copy-feedback"></span>
+      </div>
+      <button id="btn-restart" type="button" class="btn primary">Jugar otra vez</button>
+    </section>
+
+    <footer class="site-footer">
+      <p>Creador: Santiago Ordoñez</p>
+      <p>Correo electrónico: santomas1109@gmail.com</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
